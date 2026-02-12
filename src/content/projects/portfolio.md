@@ -3,7 +3,7 @@ title: Personal portfolio
 description: Personal portfolio site built with Astro, Tailwind CSS, and zero
   JavaScript by default
 date: 2025-02-01
-techStack: Astro,Tailwind CSS,Pagefind,Netlify, PageCMS
+techStack: ["Astro", "Tailwind CSS", "Pagefind", "Netlify", "PageCMS"]
 heroImage: ../../assets/projects/project_portfolio.jpeg
 featured: false
 inProgress: true
