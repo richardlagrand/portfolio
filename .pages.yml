@@ -1,6 +1,10 @@
 media:
-  input: src/assets
-  output: /assets
+  - input: src/assets/projects
+    output: src/assets/projects
+    name: Projects
+  - input: src/assets/blog
+    output: src/assets/blog
+    name: Blog
 content:
   - name: projects
     label: Projects
