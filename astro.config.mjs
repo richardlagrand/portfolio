@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import remarkRewriteImages from "./src/plugins/remark-rewrite-images.mjs";
 
 export default defineConfig({
   output: "static",
@@ -48,6 +49,7 @@ export default defineConfig({
   ],
 
   markdown: {
+    remarkPlugins: [remarkRewriteImages],
     gfm: true,
     syntaxHighlight: "shiki",
     shikiConfig: {
