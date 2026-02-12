@@ -1,5 +1,5 @@
 ---
-title: "Nederland Stijl"
+title: "Dutch Language Learning"
 description: "Dutch design system and component library for consistent brand experiences"
 date: 2024-01-20
 techStack: ["React", "Storybook", "Tailwind CSS", "Figma"]

@@ -1,5 +1,5 @@
 ---
-title: "Filtered"
+title: "Filtered AI"
 description: "Content curation platform with AI-powered recommendations"
 date: 2024-03-10
 techStack: ["Next.js", "TypeScript", "OpenAI API", "PostgreSQL"]
