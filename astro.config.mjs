@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   output: "static",
 
-  site: "https://richardlagrandportfolio.netlify.app",
+  site: "https://richardlagrand.com",
 
   prefetch: {
     prefetchAll: true,

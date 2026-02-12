@@ -3,7 +3,7 @@ export const personSchema = {
   "@type": "Person",
   name: "Richard Lagrand",
   description: "Full Stack Engineer with Product Thinking",
-  url: "https://richardlagrandportfolio.netlify.app",
+  url: "https://richardlagrand.com",
   jobTitle: "Full Stack Engineer",
   sameAs: [
     "https://www.linkedin.com/in/richardlagrand/",

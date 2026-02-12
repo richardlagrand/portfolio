@@ -6,7 +6,7 @@
   publish = "dist/"
 
 [build.environment]
-  SITE_URL = "https://richardlagrandportfolio.netlify.app"
+  SITE_URL = "https://richardlagrand.com"
 
 # Redirects & rewrites
 [[redirects]]

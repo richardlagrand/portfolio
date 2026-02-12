@@ -19,9 +19,21 @@ const { project } = Astro.props;
 const { title, description, techStack, heroImage, link, inProgress } =
   project.data;
 const { Content } = await render(project);
+
+const canonicalUrl = new URL(`/projects/${project.id}`, Astro.site).href;
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://richardlagrand.com" },
+    { "@type": "ListItem", position: 2, name: "Projects", item: "https://richardlagrand.com/projects" },
+    { "@type": "ListItem", position: 3, name: title, item: canonicalUrl },
+  ],
+};
 ---
 
 <BaseLayout title={title} description={description} image={heroImage?.src}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <article>
     {heroImage && (
       <div class="mb-12 -mx-4 md:mx-0">
