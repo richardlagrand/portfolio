@@ -1,0 +1,47 @@
+media:
+  input: src/assets
+  output: /assets
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Description, type: string, options: { maxlength: 500 } }
+      - { name: date, label: Date, type: date, required: true }
+      - { name: techStack, label: Tech Stack, type: list }
+      - { name: heroImage, label: Hero Image, type: image }
+      - { name: link, label: Link, type: string }
+      - { name: featured, label: Featured, type: boolean }
+      - { name: inProgress, label: In Progress, type: boolean }
+      - { name: body, label: Body, type: rich-text }
+  - name: blog
+    label: Blog
+    type: collection
+    path: src/content/blog
+    filename: "{primary}.md"
+    view:
+      fields: [title, pubDate]
+      primary: title
+      sort: [pubDate, title]
+      default:
+        sort: pubDate
+        order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Description, type: string, options: { maxlength: 500 } }
+      - { name: pubDate, label: Publish Date, type: date, required: true }
+      - { name: updatedDate, label: Updated Date, type: date }
+      - { name: tags, label: Tags, type: list }
+      - { name: featured, label: Featured, type: boolean }
+      - { name: heroImage, label: Hero Image, type: image }
+      - { name: body, label: Body, type: rich-text }
