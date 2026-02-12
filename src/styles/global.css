@@ -149,7 +149,7 @@ code, pre {
   color: var(--color-text-primary);
 }
 
-[data-theme="dark"] .prose code {
+[data-theme="dark"] .prose :not(pre) > code {
   color: var(--color-text-primary);
   background: var(--color-bg-secondary);
 }
@@ -167,9 +167,21 @@ code, pre {
   border-color: var(--color-border);
 }
 
-/* Shiki dual theme: swap to dark colors in dark mode */
-[data-theme="dark"] .shiki,
-[data-theme="dark"] .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
+/* Shiki dual theme (defaultColor=false): no inline colors, CSS vars only */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+}
+
+.astro-code {
+  background-color: var(--shiki-light-bg);
+}
+
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark);
+}
+
+[data-theme="dark"] .astro-code {
+  background-color: var(--shiki-dark-bg);
 }
