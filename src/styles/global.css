@@ -166,3 +166,10 @@ code, pre {
 [data-theme="dark"] .prose hr {
   border-color: var(--color-border);
 }
+
+/* Shiki dual theme: swap to dark colors in dark mode */
+[data-theme="dark"] .shiki,
+[data-theme="dark"] .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}

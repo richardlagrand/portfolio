@@ -8,6 +8,14 @@ import SocialLinks from "./SocialLinks.astro";
       <SocialLinks />
 
       <div class="flex items-center gap-md">
+        <button
+          id="debug-toggle"
+          class="text-sm text-text-light hover:text-accent transition-colors"
+          aria-label="Toggle debug mode"
+          aria-pressed="false"
+        >
+          DEBUG
+        </button>
         <span
           class="clock text-sm text-text-light"
           data-timezone="Europe/Amsterdam"
@@ -21,6 +29,20 @@ import SocialLinks from "./SocialLinks.astro";
 </footer>
 
 <script>
+  // Debug toggle
+  function toggleDebug() {
+    const current = document.documentElement.dataset.debug || 'off';
+    const next = current === 'on' ? 'off' : 'on';
+    document.documentElement.dataset.debug = next;
+    localStorage.setItem('debug-borders', next);
+    const btn = document.getElementById('debug-toggle');
+    if (btn) btn.setAttribute('aria-pressed', next === 'on' ? 'true' : 'false');
+  }
+
+  const debugState = document.documentElement.dataset.debug || 'off';
+  document.getElementById('debug-toggle')?.setAttribute('aria-pressed', debugState === 'on' ? 'true' : 'false');
+  document.getElementById('debug-toggle')?.addEventListener('click', toggleDebug);
+
   const clocks = document.querySelectorAll('.clock');
   clocks.forEach((clock) => {
     const tz = (clock as HTMLElement).dataset.timezone || 'UTC';
