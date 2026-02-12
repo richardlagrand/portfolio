@@ -14,10 +14,11 @@
   --color-text-secondary: #555555;
   --color-text-light: #999999;
 
-  /* Soft orange accent: Links, buttons, highlights */
-  --color-accent: #D4845A;
-  --color-accent-light: #E8A47E;
-  --color-accent-dark: #B0683A;
+  /* Burnt orange accent: Links, buttons, highlights */
+  /* #B54D1A on #FAFAFA = ~5.0:1 contrast (WCAG AA) */
+  --color-accent: #B54D1A;
+  --color-accent-light: #C9622E;
+  --color-accent-dark: #8B3B12;
 
   /* Semantic colors for badges/status */
   --color-status-progress: #F59E0B;

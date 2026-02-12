@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "Full stack engineer with product thinking",
-  "author": "Your Name",
+  "author": "Richard Lagrand",
   "license": "MIT",
   "scripts": {
     "dev": "astro dev",

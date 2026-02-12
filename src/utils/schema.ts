@@ -1,13 +1,13 @@
 export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Your Name",
+  name: "Richard Lagrand",
   description: "Full Stack Engineer with Product Thinking",
-  url: "https://yourdomain.com",
+  url: "https://richardlagrandportfolio.netlify.app",
   jobTitle: "Full Stack Engineer",
   sameAs: [
-    "https://linkedin.com/in/yourprofile",
-    "https://github.com/yourprofile",
+    "https://www.linkedin.com/in/richardlagrand/",
+    "https://github.com/richardlagrand",
   ],
   knowsAbout: [
     "Full Stack Development",
