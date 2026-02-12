@@ -28,6 +28,8 @@ I led this project as a 3-person team at the ArolDev coding bootcamp — our fin
 
 Filtered intercepts text before it hits the AI. Using **Google Cloud's DLP API**, it automatically detects and masks personally identifiable information (names, dates, case numbers, etc.), then forwards the sanitized text to OpenAI for processing. The user gets AI-powered insights — without ever exposing sensitive data.
 
+![](src/assets/projects/filtered/diagram.jpg)
+
 **The flow is simple:** write or paste your text → Filtered scans and redacts PII → a visual shield indicator confirms your data is clean → the sanitized prompt goes to the AI → you get your answer.
 
 The DLP pipeline actually makes **two separate calls** to Google Cloud: first an _inspect_ request to detect what sensitive entities exist, then a _de-identify_ request to mask them. This two-step approach lets us show the user exactly what was found before transforming anything — giving them a chance to review and adjust before the data moves on.
