@@ -18,7 +18,7 @@ content:
       - { name: title, label: Title, type: string, required: true }
       - { name: description, label: Description, type: string, options: { maxlength: 500 } }
       - { name: date, label: Date, type: date, required: true }
-      - { name: techStack, label: Tech Stack, type: list }
+      - { name: techStack, label: Tech Stack, type: string, list: true }
       - { name: heroImage, label: Hero Image, type: image }
       - { name: link, label: Link, type: string }
       - { name: featured, label: Featured, type: boolean }
@@ -41,7 +41,7 @@ content:
       - { name: description, label: Description, type: string, options: { maxlength: 500 } }
       - { name: pubDate, label: Publish Date, type: date, required: true }
       - { name: updatedDate, label: Updated Date, type: date }
-      - { name: tags, label: Tags, type: list }
+      - { name: tags, label: Tags, type: string, list: true }
       - { name: featured, label: Featured, type: boolean }
       - { name: heroImage, label: Hero Image, type: image }
       - { name: body, label: Body, type: rich-text }
