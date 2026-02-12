@@ -1,13 +1,19 @@
 ---
-title: "Filtered AI"
-description: "A privacy-first AI gateway that de-identifies sensitive data before it ever reaches an LLM"
+title: Filtered AI
+description: A privacy-first AI gateway that de-identifies sensitive data before
+  it ever reaches an LLM
 date: 2024-03-10
-techStack: ["Next.js", "TypeScript", "OpenAI API", "PostgreSQL"]
+techStack:
+  - Next.js
+  - TypeScript
+  - OpenAI API
+  - PostgreSQL
+  - TailwindCSS
+  - Auth0
 heroImage: ../../assets/projects/project_filtered.jpeg
-featured: true
-inProgress: false
+featured: false
+inProgress: true
 ---
-
 ## Overview
 
 Filtered (fltrd) is a privacy first AI gateway that de-identifies sensitive data before it ever reaches an LLM.
@@ -28,11 +34,9 @@ The DLP pipeline actually makes **two separate calls** to Google Cloud: first an
 
 ## Tech Stack
 
-**Frontend:** React, TypeScript, Next.js, Tailwind CSS, shadcn/ui
-**Backend:** Next.js API routes, Auth0
-**APIs:** Google Cloud DLP (de-identification), OpenAI (completions)
-**Database:** PostgreSQL via Prisma
-**Design & Planning:** Figma, Mermaid, Miro, Linear, Notion
+**Frontend:** React, TypeScript, Next.js, Tailwind CSS, shadcn/ui **Backend:** Next.js API routes, Auth0 **APIs:** Google Cloud DLP (de-identification), OpenAI (completions) **Database:** PostgreSQL via Prisma **Design & Planning:** Figma, Mermaid, Miro, Linear, Notion
+
+![](src/assets/projects/filtered/Screenshot%202026-02-12%20at%2022.45.59.png)
 
 ## Technical Challenges & Discoveries
 
