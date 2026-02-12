@@ -1,6 +1,6 @@
 ---
-title: Okki
-description: "Dutch language learning app "
+title: Okki for bright students
+description: "Gamified learning app for students linked to official curriculum "
 date: 2024-06-15
 techStack:
   - Next.JS
@@ -12,6 +12,7 @@ link: https://brightpath.study
 featured: true
 inProgress: true
 ---
+
 # Building an EdTech Platform Nobody Told Me Was Hard
 
 Still generating EdTech questions one at a time in 2026? There's a better way...
@@ -78,10 +79,10 @@ For a feature like "build proficiency tracking with spaced repetition," the cont
 
 The real cost:
 
-*   Slower iteration cycles
-*   Repeated explanations of the same problem
-*   Claude unable to "remember" why we rejected approach A, so we explore it again
-*   Had to manually manage context (keep notes, reference earlier solutions)
+- Slower iteration cycles
+- Repeated explanations of the same problem
+- Claude unable to "remember" why we rejected approach A, so we explore it again
+- Had to manually manage context (keep notes, reference earlier solutions)
 
 For a 6-week timeline, this mattered.
 
@@ -141,9 +142,9 @@ WHERE tags @> ARRAY['edu:grade:2', 'curr:subject:biology']
 
 But here's where it got messy:
 
-*   Batch updating tags on millions of questions? PostgreSQL does full table rewrites. Killed my builds for 10+ minutes.
-*   GIN indexes only work if you query them correctly. One small mistake and your query runs 500ms instead of 50ms.
-*   Denormalized fields became essential. Storing gradeLevel INT as a column (not just a tag) saved hours of optimization later.
+- Batch updating tags on millions of questions? PostgreSQL does full table rewrites. Killed my builds for 10+ minutes.
+- GIN indexes only work if you query them correctly. One small mistake and your query runs 500ms instead of 50ms.
+- Denormalized fields became essential. Storing gradeLevel INT as a column (not just a tag) saved hours of optimization later.
 
 This was uncharted territory. I'd never optimized PostgreSQL at this scale before. Claude Code explored the space. I made the final calls.
 
@@ -157,33 +158,33 @@ Simple, right? Download Spanish BOE standards, map content, generate questions.
 
 Except:
 
-*   BOE standards are PDFs. 200+ pages. Hand-written mappings. No APIs.
-*   Andalusian regional standards (BOJA) add another layer (national standards and regional variations).
-*   Textbooks organize content differently than official standards.
-*   Two teachers teaching the same topic often structure it completely differently.
+- BOE standards are PDFs. 200+ pages. Hand-written mappings. No APIs.
+- Andalusian regional standards (BOJA) add another layer (national standards and regional variations).
+- Textbooks organize content differently than official standards.
+- Two teachers teaching the same topic often structure it completely differently.
 
 The solution was architectural, not just procedural:
 
 Tag-based system meant I could represent multiple interpretations simultaneously:
 
-*   Content aligned to BOE standard A
-*   Also aligned to textbook X organization
-*   Also aligned to this specific teacher's lesson sequence
-*   All in the same question
+- Content aligned to BOE standard A
+- Also aligned to textbook X organization
+- Also aligned to this specific teacher's lesson sequence
+- All in the same question
 
 One question. Multiple valid interpretations. No schema change needed.
 
 But the dev cost was brutal:
 
-*   Parsing PDFs to extract structured data took 3x longer than expected
-*   Validating that every question actually mapped to official standards (not just generic biology) required manual review
-*   Curriculum standards change. BOJA 2023 vs. BOJA 2025. Updating 1,000+ questions takes discipline and automation.
+- Parsing PDFs to extract structured data took 3x longer than expected
+- Validating that every question actually mapped to official standards (not just generic biology) required manual review
+- Curriculum standards change. BOJA 2023 vs. BOJA 2025. Updating 1,000+ questions takes discipline and automation.
 
 Tools I built to handle this:
 
-*   Curriculum parser that extracts topics and objectives from PDFs
-*   Validation script that checks: does this question actually cover this official objective?
-*   Tagging pipeline that associates questions with multiple curriculum standards
+- Curriculum parser that extracts topics and objectives from PDFs
+- Validation script that checks: does this question actually cover this official objective?
+- Tagging pipeline that associates questions with multiple curriculum standards
 
 None of this was fun. All of it was essential.
 
@@ -272,22 +273,22 @@ If the template changes, that lesson doesn't. All students in the class see the 
 
 Why this works:
 
-*   Teachers need consistency (no surprises)
-*   Students need fairness (same test for everyone)
-*   You can edit questions without breaking lessons
-*   New lessons pull from updated templates
+- Teachers need consistency (no surprises)
+- Students need fairness (same test for everyone)
+- You can edit questions without breaking lessons
+- New lessons pull from updated templates
 
 Why this feels wrong:
 
-*   Inelegant (why not just query dynamically?)
-*   Requires discipline (must refresh caches manually)
-*   Scaling lesson creation means caching millions of IDs
+- Inelegant (why not just query dynamically?)
+- Requires discipline (must refresh caches manually)
+- Scaling lesson creation means caching millions of IDs
 
 The dev cost:
 
-*   Cache invalidation is hard. Built a nightly refresh and manual trigger.
-*   Logging what changed between cache refreshes (audit trail).
-*   Handling edge cases (what if a question is deleted? What if a template evolves?)
+- Cache invalidation is hard. Built a nightly refresh and manual trigger.
+- Logging what changed between cache refreshes (audit trail).
+- Handling edge cases (what if a question is deleted? What if a template evolves?)
 
 Simple concept. Surprisingly complex at scale.
 
@@ -297,11 +298,11 @@ Eventually I need adaptive learning. That requires tracking student proficiency 
 
 Not just "did they get it right?" but:
 
-*   Total attempts per tag
-*   Recent performance (last 10 attempts)
-*   Confidence level (how sure are we about this score?)
-*   Trend (improving? Declining? Stable?)
-*   Next review date (spaced repetition scheduling)
+- Total attempts per tag
+- Recent performance (last 10 attempts)
+- Confidence level (how sure are we about this score?)
+- Trend (improving? Declining? Stable?)
+- Next review date (spaced repetition scheduling)
 
 That's per-student, per-tag. At 100 students x 50 tags equals 5,000 proficiency records to update on every answer.
 
@@ -328,9 +329,9 @@ After each answer, async job updates this. Doesn't block the student's UI.
 
 The dev pain:
 
-*   Race conditions (what if two answers come in simultaneously?)
-*   Eventual consistency (student might see stale proficiency)
-*   Testing this is annoying (need to simulate multiple answer sequences)
+- Race conditions (what if two answers come in simultaneously?)
+- Eventual consistency (student might see stale proficiency)
+- Testing this is annoying (need to simulate multiple answer sequences)
 
 ## What Went Right: PostgreSQL GIN Indexes
 
@@ -381,15 +382,15 @@ Initial bundle: 15MB. Too large. App store distribution is painful at that size.
 
 What bloated it:
 
-*   Tailwind CSS (full stylesheet, even unused classes)
-*   shadcn components (importing more than necessary)
-*   Unused libraries left in package.json
+- Tailwind CSS (full stylesheet, even unused classes)
+- shadcn components (importing more than necessary)
+- Unused libraries left in package.json
 
 The optimization:
 
-*   Purged unused CSS with Tailwind's tree-shaking
-*   Lazy-loaded components with React.lazy()
-*   Audited node\_modules (removed 40+ unused packages)
+- Purged unused CSS with Tailwind's tree-shaking
+- Lazy-loaded components with React.lazy()
+- Audited node_modules (removed 40+ unused packages)
 
 Final bundle: 6MB. Manageable.
 
@@ -403,10 +404,10 @@ It's not.
 
 The problems:
 
-*   Batch generation (generate 50 questions overnight) needs rate limiting
-*   Cost calculation includes tokens OpenRouter uses (not just your tokens)
-*   Model pricing changes weekly
-*   You need to reconcile estimated costs vs. actual costs
+- Batch generation (generate 50 questions overnight) needs rate limiting
+- Cost calculation includes tokens OpenRouter uses (not just your tokens)
+- Model pricing changes weekly
+- You need to reconcile estimated costs vs. actual costs
 
 The solution I built:
 
@@ -460,10 +461,10 @@ Contrast this with "generic homework helper" (thousands exist, none matter).
 
 The dev cost of curriculum alignment:
 
-*   Parsing Spanish BOE standards
-*   Building tag system flexible enough for multiple interpretations
-*   Validating 1,383 questions actually map to standards (not just adjacent topics)
-*   Handling curriculum updates (BOJA 2023 vs. BOJA 2025)
+- Parsing Spanish BOE standards
+- Building tag system flexible enough for multiple interpretations
+- Validating 1,383 questions actually map to standards (not just adjacent topics)
+- Handling curriculum updates (BOJA 2023 vs. BOJA 2025)
 
 Boring work. Critical work.
 
@@ -489,22 +490,22 @@ PostgreSQL tag system with GIN indexes (scales to 100K+ questions, 15-50ms queri
 
 The stack:
 
-*   Next.js 14, TypeScript, Supabase, Prisma
-*   PostgreSQL arrays and GIN indexes (not traditional ORMs)
-*   Claude Sonnet (content generation) and Haiku (real-time feedback)
-*   OpenRouter (unified API, cost tracking)
-*   Capacitor (web to mobile without rewriting)
+- Next.js 14, TypeScript, Supabase, Prisma
+- PostgreSQL arrays and GIN indexes (not traditional ORMs)
+- Claude Sonnet (content generation) and Haiku (real-time feedback)
+- OpenRouter (unified API, cost tracking)
+- Capacitor (web to mobile without rewriting)
 
 ## The Numbers
 
-*   1,383 questions generated (€0.47 each on average)
-*   2 subjects mapped (Physics/Chemistry, Geography/History)
-*   1 grade level (2º ESO, Andalusia)
-*   5-10 students testing
-*   Query performance: 15-50ms for complex tag searches
-*   Bundle size: 6MB
-*   Cache refresh: less than 5 seconds
-*   Zero revenue (validating product-market fit first)
+- 1,383 questions generated (€0.47 each on average)
+- 2 subjects mapped (Physics/Chemistry, Geography/History)
+- 1 grade level (2º ESO, Andalusia)
+- 5-10 students testing
+- Query performance: 15-50ms for complex tag searches
+- Bundle size: 6MB
+- Cache refresh: less than 5 seconds
+- Zero revenue (validating product-market fit first)
 
 ## The Real Lesson
 
