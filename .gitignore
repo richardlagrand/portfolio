@@ -1,1 +1,10 @@
 node_modules
+docs
+.env
+.env.local
+.DS_Store
+dist/
+.netlify/
+.astro/
+.storybook-static
+storybook-static

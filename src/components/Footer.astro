@@ -1,0 +1,48 @@
+---
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<footer class="border-t border-[var(--color-border)] bg-bg-primary py-xl">
+  <div class="max-w-prose mx-auto px-[clamp(16px,4vw,48px)]">
+    <div class="flex justify-between items-center">
+      <SocialLinks />
+
+      <div class="flex items-center gap-md">
+        <span
+          class="clock text-sm text-text-light"
+          data-timezone="Europe/Amsterdam"
+        ></span>
+        <p class="text-sm text-text-light">
+          &copy; {new Date().getFullYear()} Richard Lagrand
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const clocks = document.querySelectorAll('.clock');
+  clocks.forEach((clock) => {
+    const tz = (clock as HTMLElement).dataset.timezone || 'UTC';
+    const update = () => {
+      clock.textContent = new Intl.DateTimeFormat('en-US', {
+        timeZone: tz,
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }).format(new Date());
+    };
+    update();
+    setInterval(update, 60000);
+  });
+</script>
+
+<style>
+  footer {
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  [data-theme="dark"] footer {
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.3);
+  }
+</style>

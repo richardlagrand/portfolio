@@ -1,0 +1,57 @@
+---
+import { personSchema } from "../utils/schema";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "";
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="canonical" href={canonicalURL} />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content="engineer, product, full-stack" />
+<meta name="author" content="Richard Lagrand" />
+<meta name="robots" content="index, follow" />
+
+<!-- Person Schema (JSON-LD) -->
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+{image && <meta property="og:image" content={`${siteUrl}${image}`} />}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{image && <meta name="twitter:image" content={`${siteUrl}${image}`} />}
+
+<!-- Preload critical font weights -->
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href="/fonts/Raleway-Regular.woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  as="font"
+  type="font/woff2"
+  href="/fonts/Raleway-Bold.woff2"
+  crossorigin
+/>

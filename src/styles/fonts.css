@@ -1,0 +1,29 @@
+/* Raleway: Self-hosted WOFF2 for performance
+   Downloads once, cached forever. ~57 KB total for all weights. */
+
+/* Light (300) — accent text, captions */
+@font-face {
+  font-family: "Raleway";
+  src: url("/fonts/Raleway-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Regular (400) — body text */
+@font-face {
+  font-family: "Raleway";
+  src: url("/fonts/Raleway-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold (700) — headings */
+@font-face {
+  font-family: "Raleway";
+  src: url("/fonts/Raleway-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

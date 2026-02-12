@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const allProjects = await getCollection("projects");
+const featured = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 4);
+
+const allPosts = await getCollection("blog");
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="Richard Lagrand — Full Stack Engineer"
+  description="Engineer building thoughtful products at the intersection of technology and user experience."
+>
+  <!-- Hero -->
+  <section class="mb-2xl -mt-[91px]">
+    <h1 class="hero-name text-hero font-bold leading-[0.85] tracking-tight text-text-primary">
+      RICHARD<br />LAGRAND
+    </h1>
+    <p class="text-h2 font-bold text-text-primary mt-lg">
+      Full Stack Engineer
+    </p>
+    <p class="text-sm text-text-secondary mt-sm">Amsterdam, NL</p>
+    <p class="text-base text-text-secondary mt-lg max-w-[55ch] leading-relaxed">
+      Building fast, thoughtful products at the intersection of technology and
+      user experience. Experienced with scaling from zero to product-market fit.
+    </p>
+    <div class="flex gap-md mt-lg">
+      <a
+        href="/projects"
+        class="text-accent font-bold hover:underline transition-colors"
+      >
+        View Projects &rarr;
+      </a>
+      <a
+        href="/blog"
+        class="text-accent font-bold hover:underline transition-colors"
+      >
+        Read Blog &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Currently -->
+  <section class="py-xl border-t border-[var(--color-border)]">
+    <h2
+      class="text-xs font-bold tracking-widest uppercase text-text-light mb-lg"
+    >
+      Currently
+    </h2>
+    <div class="space-y-md">
+      <div class="flex justify-between items-baseline gap-4">
+        <div>
+          <p class="text-base font-bold text-text-primary">
+            Full Stack Engineer
+          </p>
+          <p class="text-sm text-text-secondary">Freelance / Consulting</p>
+        </div>
+        <time class="text-sm text-text-light whitespace-nowrap"
+          >2023 &mdash; Present</time
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected Work -->
+  <section class="py-xl border-t border-[var(--color-border)]">
+    <h2
+      class="text-xs font-bold tracking-widest uppercase text-text-light mb-lg"
+    >
+      Selected Work
+    </h2>
+    <div class="space-y-lg">
+      {
+        featured.map((project) => (
+          <a
+            href={`/projects/${project.id}`}
+            class="block group"
+          >
+            <div class="flex justify-between items-baseline gap-4">
+              <h3 class="text-base font-bold text-text-primary group-hover:text-accent transition-colors">
+                {project.data.title}
+              </h3>
+              {project.data.inProgress && (
+                <span class="text-xs text-status-progress font-semibold whitespace-nowrap">
+                  In Progress
+                </span>
+              )}
+            </div>
+            <p class="text-sm text-text-secondary mt-xs">
+              {project.data.description}
+            </p>
+            <div class="flex gap-3 mt-xs">
+              {project.data.techStack.slice(0, 4).map((tech) => (
+                <span class="text-xs text-text-light">{tech}</span>
+              ))}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <div class="mt-lg">
+      <a
+        href="/projects"
+        class="text-accent font-bold hover:underline transition-colors text-sm"
+      >
+        View All Projects &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section class="py-xl border-t border-[var(--color-border)]">
+    <h2
+      class="text-xs font-bold tracking-widest uppercase text-text-light mb-lg"
+    >
+      Writing
+    </h2>
+    <div class="space-y-lg">
+      {
+        recentPosts.map((post) => (
+          <a href={`/blog/${post.id}`} class="block group">
+            <div class="flex justify-between items-baseline gap-4">
+              <h3 class="text-base font-bold text-text-primary group-hover:text-accent transition-colors">
+                {post.data.title}
+              </h3>
+              <time
+                class="text-sm text-text-light whitespace-nowrap"
+                datetime={post.data.pubDate.toISOString()}
+              >
+                {post.data.pubDate.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+            </div>
+            <p class="text-sm text-text-secondary mt-xs">
+              {post.data.description}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+    <div class="mt-lg">
+      <a
+        href="/blog"
+        class="text-accent font-bold hover:underline transition-colors text-sm"
+      >
+        Read All Posts &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- Connect -->
+  <section class="py-xl border-t border-[var(--color-border)]">
+    <h2
+      class="text-xs font-bold tracking-widest uppercase text-text-light mb-lg"
+    >
+      Connect
+    </h2>
+    <div class="flex gap-lg">
+      <a
+        href="https://linkedin.com/in/yourprofile"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-base font-bold text-text-primary hover:text-accent transition-colors"
+      >
+        LinkedIn &rarr;
+      </a>
+      <a
+        href="https://github.com/yourprofile"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-base font-bold text-text-primary hover:text-accent transition-colors"
+      >
+        GitHub &rarr;
+      </a>
+    </div>
+  </section>
+</BaseLayout>

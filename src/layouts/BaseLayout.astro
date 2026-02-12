@@ -1,0 +1,51 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseHead from "../components/BaseHead.astro";
+import SearchModal from "../components/SearchModal.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script is:inline>
+      (function() {
+        var t = localStorage.getItem('theme')
+          || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = t;
+        document.documentElement.dataset.debug = localStorage.getItem('debug-borders') || 'off';
+      })();
+    </script>
+    <BaseHead title={title} description={description} image={image} />
+  </head>
+  <body class="bg-bg-primary text-text-primary font-sans">
+    <Header />
+    <main class="max-w-prose mx-auto pl-sm pr-[clamp(16px,4vw,48px)] py-2xl">
+      <slot />
+    </main>
+    <SearchModal />
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  @layer base {
+    html,
+    body {
+      height: 100%;
+    }
+
+    main {
+      min-height: calc(100vh - 200px);
+    }
+  }
+</style>

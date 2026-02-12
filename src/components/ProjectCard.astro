@@ -1,0 +1,77 @@
+---
+import type { CollectionEntry } from "astro:content";
+import InProgressBadge from "./InProgressBadge.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { title, description, techStack, heroImage, link, inProgress } =
+  project.data;
+---
+
+<article
+  class="group border border-[var(--color-border)] rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+>
+  <div class="relative h-64 overflow-hidden bg-bg-secondary">
+    {heroImage ? (
+      <img
+        src={heroImage.src}
+        alt={title}
+        width="600"
+        height="400"
+        loading="lazy"
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+    ) : (
+      <div class="w-full h-full flex items-center justify-center text-text-light text-sm">No image</div>
+    )}
+    {inProgress && <InProgressBadge />}
+  </div>
+
+  <div class="p-8">
+    <h3 class="text-h3 font-bold text-text-primary mb-2">
+      <a
+        href={`/projects/${project.id}`}
+        class="hover:text-accent transition-colors"
+      >
+        {title}
+      </a>
+    </h3>
+
+    <p class="text-base text-text-secondary mb-4">
+      {description}
+    </p>
+
+    <div class="mb-4 flex flex-wrap gap-2">
+      {
+        techStack.map((tech) => (
+          <span class="px-3 py-1 text-sm bg-bg-secondary text-text-primary rounded-full">
+            {tech}
+          </span>
+        ))
+      }
+    </div>
+
+    {
+      link && (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block text-accent hover:text-accent-dark font-semibold transition-colors"
+        >
+          View Project &rarr;
+        </a>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  article {
+    box-shadow: var(--shadow-base);
+    background: var(--color-bg-primary);
+  }
+</style>

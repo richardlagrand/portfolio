@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { title, description, techStack, heroImage, link, inProgress } =
+  project.data;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={title} description={description} image={heroImage?.src}>
+  <article>
+    {heroImage && (
+      <div class="mb-12 -mx-4 md:mx-0">
+        <img
+          src={heroImage.src}
+          alt={title}
+          width="800"
+          height="400"
+          class="w-full rounded-lg"
+        />
+      </div>
+    )}
+
+    <h1 class="text-h1 font-bold text-text-primary mb-4">{title}</h1>
+
+    <div class="flex gap-4 mb-8 items-center">
+      {
+        inProgress && (
+          <span class="px-3 py-1 bg-status-progress text-white rounded-full text-sm font-bold">
+            In Progress
+          </span>
+        )
+      }
+      {
+        link && (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent hover:text-accent-dark font-bold"
+          >
+            View on GitHub &rarr;
+          </a>
+        )
+      }
+    </div>
+
+    <div class="mb-8">
+      <h3 class="text-sm font-bold text-text-light uppercase mb-3">
+        Tech Stack
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        {
+          techStack.map((tech) => (
+            <span class="px-3 py-1 bg-bg-secondary text-text-primary rounded-full text-sm">
+              {tech}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <p class="text-lg text-text-secondary mb-xl">{description}</p>
+
+    <div class="prose max-w-prose">
+      <Content />
+    </div>
+
+    <div class="mt-2xl pt-10 border-t border-[var(--color-border)]">
+      <a href="/projects" class="text-accent hover:text-accent-dark font-bold">
+        &larr; Back to Projects
+      </a>
+    </div>
+  </article>
+</BaseLayout>

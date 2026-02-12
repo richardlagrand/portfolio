@@ -1,0 +1,167 @@
+@import "./fonts.css";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* BRAND COLORS (Light mode defaults) */
+
+  /* Background: Light, clean, minimal */
+  --color-bg-primary: #FAFAFA;
+  --color-bg-secondary: #F5F5F5;
+
+  /* Text: High contrast for readability */
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-light: #999999;
+
+  /* Soft orange accent: Links, buttons, highlights */
+  --color-accent: #D4845A;
+  --color-accent-light: #E8A47E;
+  --color-accent-dark: #B0683A;
+
+  /* Semantic colors for badges/status */
+  --color-status-progress: #F59E0B;
+  --color-status-success: #10B981;
+  --color-status-warning: #EF4444;
+
+  /* Border color */
+  --color-border: rgba(0, 0, 0, 0.12);
+
+  /* TYPOGRAPHY */
+
+  /* Raleway: Body + Headlines (self-hosted in fonts.css) */
+  --font-sans: "Raleway", "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Font sizes: --text-* maps to text-* utilities in Tailwind v4 */
+  --text-xs: 0.875rem;
+  --text-sm: 1rem;
+  --text-base: 1.25rem;
+  --text-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+  --text-h2: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
+  --text-h1: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --text-hero: clamp(3.5rem, 10vw, 10rem);
+  --text-display: clamp(2.5rem, 5vw, 5rem);
+
+  /* Line heights: --leading-* maps to leading-* utilities */
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+
+  /* Max width: 960px for portfolio layout */
+  --max-width-prose: 960px;
+
+  /* SPACING: Generous scale for breathing room */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-base: 20px;
+  --spacing-md: 32px;
+  --spacing-lg: 48px;
+  --spacing-xl: 64px;
+  --spacing-2xl: 96px;
+  --spacing-3xl: 128px;
+
+  /* BORDER RADIUS: Modern, rounded */
+  --radius-sm: 4px;
+  --radius-base: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* BOX SHADOWS: Soft, diffuse */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-base: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  /* TRANSITIONS */
+  --transition-duration-base: 150ms;
+  --transition-timing-default: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode: overrides @theme custom properties with higher specificity */
+[data-theme="dark"] {
+  --color-bg-primary: #101012;
+  --color-bg-secondary: #1a1a1e;
+  --color-text-primary: #e8e8e8;
+  --color-text-secondary: #b0b0b0;
+  --color-text-light: #888888;
+  --color-accent: #E8A47E;
+  --color-accent-light: #D4845A;
+  --color-accent-dark: #F0C0A0;
+  --color-status-progress: #FBBF24;
+  --color-status-success: #34D399;
+  --color-status-warning: #F87171;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-base: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Debug mode: layout inspection overlay */
+[data-debug="on"] * {
+  outline: 1px solid rgba(255, 0, 0, 0.15);
+}
+
+/* Base styles */
+
+body {
+  font-feature-settings:
+    "ss01" 1,
+    "ss03" 1,
+    "ss05" 1,
+    "ss08" 1,
+    "ss09" 1,
+    "ss11" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+code, pre {
+  font-feature-settings: "liga" 0;
+}
+
+/* Extra bold hero text without additional font weight */
+.hero-name {
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+/* Dark mode prose overrides */
+[data-theme="dark"] .prose {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .prose h1,
+[data-theme="dark"] .prose h2,
+[data-theme="dark"] .prose h3,
+[data-theme="dark"] .prose h4,
+[data-theme="dark"] .prose h5,
+[data-theme="dark"] .prose h6 {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .prose a {
+  color: var(--color-accent);
+}
+
+[data-theme="dark"] .prose strong {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .prose code {
+  color: var(--color-text-primary);
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .prose blockquote {
+  border-color: var(--color-accent);
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .prose li::marker {
+  color: var(--color-text-light);
+}
+
+[data-theme="dark"] .prose hr {
+  border-color: var(--color-border);
+}

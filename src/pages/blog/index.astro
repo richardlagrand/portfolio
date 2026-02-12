@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const sorted = allPosts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Thoughts on engineering, product, and building things"
+>
+  <h1 class="text-h1 font-bold text-text-primary mb-4">Blog</h1>
+  <p class="text-lg text-text-secondary mb-xl">
+    Thoughts on engineering, product, and building things that matter.
+  </p>
+
+  <div>
+    {sorted.map((post) => <BlogCard post={post} />)}
+  </div>
+</BaseLayout>
