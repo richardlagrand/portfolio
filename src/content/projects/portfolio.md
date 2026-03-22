@@ -217,13 +217,11 @@ Writing in markdown is genuinely nice for technical content. Code blocks render 
 
 But there are limits. For instance, I wanted to include a [Mermaid](https://mermaid.js.org/) diagram in a blog post. In many markdown tools, you can write:
 
-
 ```mermaid
 graph LR
   A[User Request] --> B[Astro Build]
   B --> C[Static HTML]
 ```
-
 
 And it renders as a diagram. Not in Astro — it just shows up as a code block. To actually render Mermaid diagrams, you'd need to either:
 
