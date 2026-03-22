@@ -246,6 +246,14 @@ A 2KB tracking script, serious. No need for any cookie banners as no fingerprint
 
 You can self-host, but the cloud version allows up to 3 sites to track. Enough to give it a try, and do take a plan if you go cloud and want to support the amazing team behind Umami.
 
+**The tricky part: Ad blockers**
+
+I have a really good 'ad blocker' that keeps me save. It's called 'ghostery' and I can really recommend it. It's so good that it also blocked Umami from tracking. But, there's a solution to everything. In this case to [use a proxy:](https://umami.is/docs/bypass-ad-blockers)
+
+- `/stats/script.js` → proxies `cloud.umami.is/script.js` — ad blockers don't recognise your own domain
+- `/stats/api/send` → proxies `cloud.umami.is/api/send` — the endpoint the script POSTs events to
+- `data-host-url` tells the Umami script to send events to your proxied endpoint instead of directly to Umami
+
 ## The performance results
 
 After all the optimization, here's where things landed:
