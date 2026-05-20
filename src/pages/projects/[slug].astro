@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
+import { Picture } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -37,11 +38,14 @@ const breadcrumbSchema = {
   <article>
     {heroImage && (
       <div class="mb-12 -mx-4 md:mx-0">
-        <img
-          src={heroImage.src}
+        <Picture
+          src={heroImage}
           alt={title}
-          width="800"
-          height="400"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 768px) 100vw, 800px"
+          formats={["avif", "webp"]}
+          loading="eager"
+          fetchpriority="high"
           class="w-full rounded-lg"
         />
       </div>

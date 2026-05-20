@@ -28,7 +28,7 @@ const blogPostingSchema = {
   datePublished: pubDate.toISOString(),
   ...(updatedDate && { dateModified: updatedDate.toISOString() }),
   url: canonicalUrl,
-  ...(heroImage && { image: new URL(heroImage, Astro.site).href }),
+  ...(heroImage && { image: new URL(heroImage.src, Astro.site).href }),
   author: {
     "@type": "Person",
     name: "Richard Lagrand",
@@ -47,7 +47,7 @@ const breadcrumbSchema = {
 };
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}>
+<BaseLayout title={title} description={description} image={heroImage?.src}>
   <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <article>

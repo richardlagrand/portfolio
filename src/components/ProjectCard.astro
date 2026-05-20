@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { Picture } from "astro:assets";
 import InProgressBadge from "./InProgressBadge.astro";
 
 interface Props {
@@ -16,11 +17,12 @@ const { title, description, techStack, heroImage, link, inProgress } =
 >
   <div class="relative h-64 overflow-hidden bg-bg-secondary">
     {heroImage ? (
-      <img
-        src={heroImage.src}
+      <Picture
+        src={heroImage}
         alt={title}
-        width="600"
-        height="400"
+        widths={[400, 600, 800]}
+        sizes="(max-width: 768px) 100vw, 400px"
+        formats={["avif", "webp"]}
         loading="lazy"
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />
