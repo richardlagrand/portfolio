@@ -12,8 +12,9 @@ techStack:
   - Umami
 heroImage: ../../assets/projects/project_portfolio.jpeg
 featured: false
-inProgress: true
+inProgress: false
 ---
+
 ## The starting point
 
 I've built plenty of sites with [Next.js](https://nextjs.org/) and React over the years. They're great for complex web apps, but for a personal portfolio? It always felt like bringing a tank to a knife fight. Every Next.js portfolio I made shipped hundreds of kilobytes of JavaScript just to render what's essentially static text and images.
@@ -36,18 +37,16 @@ I wanted something that would generate pure HTML and CSS at build time, with **z
 
 After some research, here's what I went with:
 
-
-| Layer | Choice | Why |
+| Layer         | Choice                                                             | Why                                                       |
 | ------------- | ------------------------------------------------------------------ | --------------------------------------------------------- |
-| **Framework** | [Astro 5](https://astro.build/) | Static-first, zero JS by default, great content support |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Utility-first, CSS-only output, new CSS-based config |
-| **Search** | [Pagefind](https://pagefind.app/) | Static search index, tiny runtime (~6KB), no backend |
-| **Fonts** | [Raleway](https://fonts.google.com/specimen/Raleway) (self-hosted) | Free, geometric, Proxima Nova feel with OpenType tweaks |
-| **CMS** | [PageCMS](https://pagescms.org/) | Git-based, lightweight, no vendor lock-in |
-| **Hosting** | [Netlify](https://www.netlify.com/) | Global CDN, auto-deploys from GitHub, free tier |
-| **Runtime** | [Bun](https://bun.sh/) | Fast installs, fast builds, drop-in Node replacement |
-| **Tracking** | [Umami](umami.ts) | 2KB tracking script that is privacy first. Best for both. |
-
+| **Framework** | [Astro 5](https://astro.build/)                                    | Static-first, zero JS by default, great content support   |
+| **Styling**   | [Tailwind CSS v4](https://tailwindcss.com/)                        | Utility-first, CSS-only output, new CSS-based config      |
+| **Search**    | [Pagefind](https://pagefind.app/)                                  | Static search index, tiny runtime (~6KB), no backend      |
+| **Fonts**     | [Raleway](https://fonts.google.com/specimen/Raleway) (self-hosted) | Free, geometric, Proxima Nova feel with OpenType tweaks   |
+| **CMS**       | [PageCMS](https://pagescms.org/)                                   | Git-based, lightweight, no vendor lock-in                 |
+| **Hosting**   | [Netlify](https://www.netlify.com/)                                | Global CDN, auto-deploys from GitHub, free tier           |
+| **Runtime**   | [Bun](https://bun.sh/)                                             | Fast installs, fast builds, drop-in Node replacement      |
+| **Tracking**  | [Umami](umami.ts)                                                  | 2KB tracking script that is privacy first. Best for both. |
 
 Let me walk through the interesting decisions.
 
@@ -85,7 +84,7 @@ I'd been using Tailwind v3 with a `tailwind.config.ts` file for years. [Tailwind
 @import "tailwindcss";
 
 @theme {
-  --color-accent: #B54D1A;
+  --color-accent: #b54d1a;
   --text-base: 1.25rem;
   --font-sans: "Raleway", "Inter", system-ui, sans-serif;
   --spacing-base: 20px;
@@ -136,15 +135,13 @@ For this project, I decided to try [Bun](https://bun.sh/) — mostly out of curi
 
 For a project like this — an Astro site with Tailwind and a few plugins — Bun is a clear win. The faster feedback loop during development adds up over a full project. I'd reach for it again on new projects, though for existing large codebases with complex native dependencies, I'd test more carefully before switching.
 
-
-|  | npm | Yarn | Bun |
+|                     | npm                 | Yarn                  | Bun                   |
 | ------------------- | ------------------- | --------------------- | --------------------- |
-| **Install speed** | Baseline | ~Same as npm | 2-5x faster |
-| **Lockfile** | `package-lock.json` | `yarn.lock` | `bun.lock` |
-| **Comes with Node** | Yes | No (separate install) | No (separate install) |
-| **TypeScript** | Needs `ts-node` | Needs `ts-node` | Built-in |
-| **Maturity** | Very mature | Mature | Newer, evolving fast |
-
+| **Install speed**   | Baseline            | ~Same as npm          | 2-5x faster           |
+| **Lockfile**        | `package-lock.json` | `yarn.lock`           | `bun.lock`            |
+| **Comes with Node** | Yes                 | No (separate install) | No (separate install) |
+| **TypeScript**      | Needs `ts-node`     | Needs `ts-node`       | Built-in              |
+| **Maturity**        | Very mature         | Mature                | Newer, evolving fast  |
 
 ## Challenges I didn't expect
 
@@ -163,14 +160,14 @@ If you name them wrong, the utilities simply don't exist and you get no error �
 
 Another fun one: when you change values inside the `@theme` block in Tailwind v4, Hot Module Replacement doesn't always pick up the changes cleanly. You often need to restart the dev server and do a hard refresh. Not a big deal once you know, but confusing when you're tweaking your design tokens and nothing seems to update.
 
-Also, **unlayered CSS overrides `@layer utilities**`. If you put a CSS reset or global styles in an Astro `<style is:global>` block without wrapping them in a `@layer`, they'll override your Tailwind utilities. Tailwind v4's Preflight handles resets, so you don't need your own.
+Also, **unlayered CSS overrides `@layer utilities**`. If you put a CSS reset or global styles in an Astro `<style is:global>`block without wrapping them in a`@layer`, they'll override your Tailwind utilities. Tailwind v4's Preflight handles resets, so you don't need your own.
 
 ### Astro 4 vs Astro 5: Content Layer API changes
 
 I started with documentation written for Astro 4, but Astro 5 changed a few things in the Content Layer API:
 
 - **Config file location** — `src/content.config.ts` (Astro 5) instead of `src/content/config.ts` (Astro 4)
-- **Standalone `render()**` — You import `render` from `astro:content` directly, rather than calling `entry.render()`
+- **Standalone `render()**`— You import`render`from`astro:content`directly, rather than calling`entry.render()`
 - `**entry.id` not `entry.slug**` — Routes use `id` now
 - `**z.coerce.date()**` — Required for parsing YAML date strings in frontmatter
 
@@ -278,14 +275,12 @@ The Netlify config adds aggressive caching: one year for fonts and hashed assets
 
 After deploying, I ran [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) on the production URL. The results were encouraging:
 
-
-| Category | Score |
+| Category           | Score |
 | ------------------ | ----- |
-| **Performance** | 99 |
-| **Accessibility** | 94 |
-| **Best Practices** | 100 |
-| **SEO** | 100 |
-
+| **Performance**    | 99    |
+| **Accessibility**  | 94    |
+| **Best Practices** | 100   |
+| **SEO**            | 100   |
 
 Three perfect or near-perfect scores — but that **94 on Accessibility** stood out. What was I missing?
 
@@ -295,10 +290,10 @@ This is one of those things that's easy to miss if you're designing by eye. The 
 
 ```css
 /* Before: pretty but inaccessible */
---color-accent: #D4845A;  /* ~2.8:1 on #FAFAFA — fails AA */
+--color-accent: #d4845a; /* ~2.8:1 on #FAFAFA — fails AA */
 
 /* After: still warm, now accessible */
---color-accent: #B54D1A;  /* ~5.0:1 on #FAFAFA — passes AA */
+--color-accent: #b54d1a; /* ~5.0:1 on #FAFAFA — passes AA */
 ```
 
 A useful tool for checking this is the [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) — plug in your foreground and background colors and it tells you instantly whether you pass AA or AAA.
