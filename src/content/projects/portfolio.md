@@ -160,14 +160,14 @@ If you name them wrong, the utilities simply don't exist and you get no error �
 
 Another fun one: when you change values inside the `@theme` block in Tailwind v4, Hot Module Replacement doesn't always pick up the changes cleanly. You often need to restart the dev server and do a hard refresh. Not a big deal once you know, but confusing when you're tweaking your design tokens and nothing seems to update.
 
-Also, **unlayered CSS overrides `@layer utilities**`. If you put a CSS reset or global styles in an Astro `<style is:global>`block without wrapping them in a`@layer`, they'll override your Tailwind utilities. Tailwind v4's Preflight handles resets, so you don't need your own.
+Also, **unlayered CSS overrides `@layer utilities**`. If you put a CSS reset or global styles in an Astro `<style is:global>` block without wrapping them in a `@layer`, they'll override your Tailwind utilities. Tailwind v4's Preflight handles resets, so you don't need your own.
 
 ### Astro 4 vs Astro 5: Content Layer API changes
 
 I started with documentation written for Astro 4, but Astro 5 changed a few things in the Content Layer API:
 
 - **Config file location** — `src/content.config.ts` (Astro 5) instead of `src/content/config.ts` (Astro 4)
-- **Standalone `render()**`— You import`render`from`astro:content`directly, rather than calling`entry.render()`
+- **Standalone `render()**` — You import `render` from `astro:content` directly, rather than calling `entry.render()`
 - `**entry.id` not `entry.slug**` — Routes use `id` now
 - `**z.coerce.date()**` — Required for parsing YAML date strings in frontmatter
 

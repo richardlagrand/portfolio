@@ -36,7 +36,7 @@
   /* Font sizes: --text-* maps to text-* utilities in Tailwind v4 */
   --text-xs: 0.875rem;
   --text-sm: 1rem;
-  --text-base: 1.25rem;
+  --text-base: 1.5rem;
   --text-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
   --text-h2: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);
   --text-h1: clamp(2rem, 1.5rem + 2vw, 3rem);
@@ -125,6 +125,12 @@ code, pre {
 /* Extra bold hero text without additional font weight */
 .hero-name {
   -webkit-text-stroke: 1.5px currentColor;
+}
+
+/* Rendered markdown body copy tracks the base font-size token
+   (the typography plugin otherwise defaults prose to 1rem) */
+.prose {
+  font-size: var(--text-base);
 }
 
 /* Dark mode prose overrides */
