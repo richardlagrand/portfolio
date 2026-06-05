@@ -1,8 +1,8 @@
 ---
 title: "Dutch Language Learning"
 description: "An online platform for personalised 1-on-1 Dutch language lessons for children aged 5–16, delivered remotely by native-speaking tutors."
-date: 2024-01-20
-techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Payload CMS"]
+date: 2026-02-08
+techStack: ["Next.js", "TypeScript", "Payload CMS", "MongoDB"]
 heroImage: ../../assets/projects/project_nto.jpeg
 link: "https://nederlandstaalonderwijs.com"
 featured: false
@@ -34,4 +34,4 @@ Entirely online — video lessons with native Dutch-speaking instructors — so 
 
 ## Under the hood
 
-The site runs on **Next.js** with **TypeScript** and **Tailwind CSS**, backed by **Payload CMS** as a headless content layer so the tutors can edit programmes, pricing and page copy without touching code. Payload was chosen over WordPress on purpose: instead of bending a PHP-and-plugins stack to fit a modern React frontend, Payload gives a code-first, type-safe content model that lives in the same TypeScript codebase as the app — one language, one repository, no REST/ACF glue in between. The one rough edge has been media: Payload writes uploads to the local filesystem by default, which doesn't survive serverless deployments where the disk is ephemeral, so images added through the admin can fail to load in production until media is moved to a persistent store (a cloud-storage adapter such as S3) and Next.js' image host config is pointed at it.
+The site runs on **Next.js** (App Router) with **TypeScript** and a **MongoDB**-backed **Payload CMS** as a headless content layer, so the tutors can edit programmes, pricing and page copy without touching code. Payload was chosen over WordPress on purpose: instead of bending a PHP-and-plugins stack to fit a modern React frontend, Payload gives a code-first, type-safe content model that lives in the same TypeScript codebase as the app — one language, one repository, no REST/ACF glue in between. The one rough edge has been media: Payload writes uploads to the local filesystem by default, which doesn't survive serverless deployments where the disk is ephemeral, so images added through the admin can fail to load in production until media is moved to a persistent store (a cloud-storage adapter such as S3) and Next.js' image host config is pointed at it.
