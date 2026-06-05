@@ -69,7 +69,7 @@ const breadcrumbSchema = {
             rel="noopener noreferrer"
             class="text-accent hover:text-accent-dark font-bold"
           >
-            View on GitHub &rarr;
+            {link.includes("github.com") ? "View on GitHub" : "Visit site"} &rarr;
           </a>
         )
       }
